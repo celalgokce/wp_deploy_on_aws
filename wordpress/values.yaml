@@ -2,7 +2,7 @@ replicaCount: 1
 
 image:
   repository: wordpress
-  tag: latest
+  tag: "6.4-apache"
   pullPolicy: IfNotPresent
 
 service:
@@ -10,15 +10,16 @@ service:
   port: 80
 
 database:
-  host: mysql-service
+  host: mysql
 
-# DB bilgileri artık secrets/secret-values.yaml dosyasından gelecek
-# db:
-#   user: # şifrelenmiş dosyadan gelecek
-#   password: # şifrelenmiş dosyadan gelecek  
-#   name: # şifrelenmiş dosyadan gelecek
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 250m
+    memory: 256Mi
 
-resources: {}
 nodeSelector: {}
 tolerations: []
-affinity: []
+affinity: {}
