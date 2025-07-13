@@ -12,16 +12,13 @@ service:
 database:
   host: mysql-service
 
-db:
-  user: root
-  password: mypassword
-  name: wordpress
-
+# DB bilgileri artık secrets/secret-values.yaml dosyasından gelecek
+# db:
+#   user: # şifrelenmiş dosyadan gelecek
+#   password: # şifrelenmiş dosyadan gelecek  
+#   name: # şifrelenmiş dosyadan gelecek
 
 resources: {}
-
 nodeSelector: {}
-
 tolerations: []
-
 affinity: []
