@@ -1,16 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: wordpress
+  name: {{ include "wordpress.fullname" . }}
+  labels:
+    {{- include "wordpress.labels" . | nindent 4 }}
 spec:
   replicas: {{ .Values.replicaCount }}
   selector:
     matchLabels:
-      app: wordpress
+      {{- include "wordpress.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        app: wordpress
+        {{- include "wordpress.selectorLabels" . | nindent 8 }}
     spec:
       containers:
         - name: wordpress
@@ -36,3 +38,5 @@ spec:
                 secretKeyRef:
                   name: wordpress-secret
                   key: db_name
+          resources:
+            {{- toYaml .Values.resources | nindent 12 }}

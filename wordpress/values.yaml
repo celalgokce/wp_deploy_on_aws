@@ -10,7 +10,7 @@ service:
   port: 80
 
 database:
-  host: mysql
+  host: wordpress-mysql
 
 resources:
   limits:

@@ -1,11 +1,15 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: wordpress-service
+  name: {{ include "wordpress.fullname" . }}-service
+  labels:
+    {{- include "wordpress.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
-  selector:
-    app: wordpress
   ports:
     - port: {{ .Values.service.port }}
       targetPort: 80
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "wordpress.selectorLabels" . | nindent 4 }}
