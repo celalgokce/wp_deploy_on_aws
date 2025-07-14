@@ -1,0 +1,36 @@
+# Docker Desktop optimizations
+replicaCount: 1
+
+# NodePort service for local access
+service:
+  type: NodePort
+  port: 80
+  nodePort: 30080
+
+# Smaller resources for local development
+resources:
+  requests:
+    cpu: 100m
+    memory: 128Mi
+  limits:
+    cpu: 500m
+    memory: 512Mi
+
+# Database host
+database:
+  host: wordpress-local-mysql
+
+# MySQL local configuration with MORE MEMORY
+mysql:
+  primary:
+    persistence:
+      enabled: true
+      storageClass: "hostpath"
+      size: 2Gi
+    resources:
+      requests:
+        cpu: 100m
+        memory: 512Mi  # 128Mi → 512Mi
+      limits:
+        cpu: 500m      # 250m → 500m
+        memory: 1Gi    # 256Mi → 1Gi
