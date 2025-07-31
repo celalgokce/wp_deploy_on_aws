@@ -1,0 +1,20 @@
+# Age private key - NEVER commit this!
+age-key.txt
+
+# Helm generated files
+wordpress/charts/
+*.tgz
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.tmp
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Backup files
+*-backup.yaml
+*-backup.yml

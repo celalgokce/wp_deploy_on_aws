@@ -9,13 +9,13 @@ spec:
   project: wordpress-project
   
   source:
-    repoURL: https://github.com/YOUR_USERNAME/wordpress-on-k8s  # Update this!
+    repoURL: https://github.com/celalgokce/wp_deploy_on_aws_and_Docker_desktop.git
     targetRevision: HEAD
     path: wordpress
     helm:
       valueFiles:
       - ../values-local.yaml
-      - secrets/database.yaml
+      - secrets/database.yaml  
       
   destination:
     server: https://kubernetes.default.svc
@@ -31,7 +31,6 @@ spec:
     - PrunePropagationPolicy=foreground
     - PruneLast=true
     
-  # Health check configuration  
   ignoreDifferences:
   - group: apps
     kind: Deployment
