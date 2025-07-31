@@ -1,0 +1,39 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: wordpress-local
+  namespace: argocd
+  finalizers:
+  - resources-finalizer.argocd.argoproj.io
+spec:
+  project: wordpress-project
+  
+  source:
+    repoURL: https://github.com/YOUR_USERNAME/wordpress-on-k8s  # Update this!
+    targetRevision: HEAD
+    path: wordpress
+    helm:
+      valueFiles:
+      - ../values-local.yaml
+      - secrets/database.yaml
+      
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: default
+    
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+      allowEmpty: false
+    syncOptions:
+    - CreateNamespace=true
+    - PrunePropagationPolicy=foreground
+    - PruneLast=true
+    
+  # Health check configuration  
+  ignoreDifferences:
+  - group: apps
+    kind: Deployment
+    jsonPointers:
+    - /spec/replicas
